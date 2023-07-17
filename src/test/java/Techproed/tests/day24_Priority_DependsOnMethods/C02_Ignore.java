@@ -5,18 +5,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class C01_Priority {
+public class C02_Ignore {
     WebDriver driver;
-    /*
-    Junit'te test methodlarını istediğimiz şekilde sıralamak için method isimlerini alfabetiik ve numerik
-    sıralı olarak yazmamız gerekiyordu. TestNG framework'ünde bu sıralama için @test notasyonundan sonra
-    parametre olarak (priority = 1 ) gibi öncelik sırası belirterek tesrt methodlarımızı sıralayabiliriz.
-    Priority kullanmadığımız method'da priority değerini 0 (sıfır ) olarak kabul eder.
-     */
+
 
     @BeforeMethod
     public void setUp() {
@@ -26,16 +22,17 @@ public class C01_Priority {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
     }
 
+    @Ignore
     @Test(priority = 1)
-    public void amazonTest() { //--> ikinci olarak amazon çalışır
+    public void amazonTest() {
         driver.get("https://amazon.com");
     }
-    @Test
+    @Test(enabled = false)
     public void youtubeTest() {
-        driver.get("https://youtube.com"); //--> ilk olarak youtube çalışır default = 0 dır
+        driver.get("https://youtube.com");
     }
     @Test(priority = 2)
-    public void facebookTest() { //--> son olarak facebook çalışsın
+    public void facebookTest() {
         driver.get("https://facebook.com");
     }
 
